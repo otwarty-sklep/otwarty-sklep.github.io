@@ -1,0 +1,19 @@
+---
+// Swiss layout — editorial, 620px, czyste tagi
+const { title, description } = Astro.props;
+const pageTitle = title ? `${title} — Otwarty Sklep` : 'Otwarty Sklep';
+const pageDesc = description || 'Otwarty Sklep — darmowy sklep internetowy w 10 minut.';
+---
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{pageTitle}</title>
+  <meta name="description" content={pageDesc}>
+  <link rel="stylesheet" href="/swiss.css">
+</head>
+<body>
+  <slot />
+</body>
+</html>

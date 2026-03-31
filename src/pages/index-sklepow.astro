@@ -1,12 +1,12 @@
 ---
-import Base from '../layouts/Base.astro';
+import Shadcn from '../layouts/Shadcn.astro';
 import { getStats, loadShops } from '../data/shops.js';
 
 const stats = await getStats();
 const shops = await loadShops();
 const topShops = shops.filter(s => s.score >= 6).sort((a, b) => b.score - a.score).slice(0, 20);
 ---
-<Base title="Index polskich sklepów">
+<Shadcn title="Index polskich sklepów">
   <hgroup>
     <h1>Index polskich sklepów</h1>
     <p>{stats.total.toLocaleString('pl')} sklepów przeskanowanych pod kątem AI readiness</p>
@@ -27,7 +27,7 @@ const topShops = shops.filter(s => s.score >= 6).sort((a, b) => b.score - a.scor
     </article>
     <article>
       <strong>{stats.withFeed.toLocaleString('pl')}</strong>
-      <p>z feedem produktowym ({Math.round(stats.withFeed / stats.total * 100)}%)</p>
+      <p>z feedem ({Math.round(stats.withFeed / stats.total * 100)}%)</p>
     </article>
   </section>
 
@@ -66,4 +66,4 @@ const topShops = shops.filter(s => s.score >= 6).sort((a, b) => b.score - a.scor
       </tbody>
     </table>
   </figure>
-</Base>
+</Shadcn>

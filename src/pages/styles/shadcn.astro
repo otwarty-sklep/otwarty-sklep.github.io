@@ -1,0 +1,55 @@
+---
+import Shadcn from '../../layouts/Shadcn.astro';
+---
+<Shadcn title="shadcn.css showcase">
+  <hgroup>
+    <h1>shadcn.css</h1>
+    <p>Dashboard style. Szeroki layout, ciasna typografia, karty, tabele, score-bary.</p>
+  </hgroup>
+
+  <section data-grid>
+    <article><strong>23 194</strong><p>sklepów</p></article>
+    <article><strong>43%</strong><p>schema.org</p></article>
+    <article><strong>51%</strong><p>sitemap</p></article>
+    <article><strong>12%</strong><p>feed</p></article>
+  </section>
+
+  <h2>Tabela</h2>
+  <figure>
+    <table>
+      <thead><tr><th>Domena</th><th>Score</th><th>Schema</th><th>Feed</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><a href="#">kawiarnia.pl</a></td>
+          <td><div data-score><span data-fill="high"></span><span data-fill="high"></span><span data-fill="high"></span><span data-fill="high"></span><span data-fill="high"></span><span data-fill="high"></span><span data-fill="high"></span><span data-fill="high"></span><span data-fill="high"></span><span data-fill="high"></span><span></span><span></span><span></span><span></span></div></td>
+          <td><span data-badge="yes">tak</span></td>
+          <td><span data-badge="yes">tak</span></td>
+        </tr>
+        <tr>
+          <td><a href="#">sklep-test.pl</a></td>
+          <td><div data-score><span data-fill="mid"></span><span data-fill="mid"></span><span data-fill="mid"></span><span data-fill="mid"></span><span data-fill="mid"></span><span data-fill="mid"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></td>
+          <td><span data-badge="yes">tak</span></td>
+          <td><span data-badge="no">nie</span></td>
+        </tr>
+        <tr>
+          <td><a href="#">nowy.pl</a></td>
+          <td><div data-score><span data-fill="low"></span><span data-fill="low"></span><span data-fill="low"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></td>
+          <td><span data-badge="no">nie</span></td>
+          <td><span data-badge="no">nie</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </figure>
+
+  <h2>Typografia</h2>
+  <p>Paragraf z <strong>boldem</strong>, <em>kursywą</em>, <mark>markerem</mark>, <a href="#">linkiem</a>, <code>kodem</code> i <small>małym tekstem</small>.</p>
+
+  <h2>Karta</h2>
+  <article>
+    <h3>Article</h3>
+    <p>Border, radius, shadow. <span data-badge="green">aktywny</span></p>
+  </article>
+
+  <h2>Badges</h2>
+  <p><span data-badge="yes">tak</span> <span data-badge="no">nie</span> <span data-badge="green">ok</span> <span data-badge="red">błąd</span> <span data-badge>neutral</span></p>
+</Shadcn>
