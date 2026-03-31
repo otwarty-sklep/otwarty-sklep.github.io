@@ -1,0 +1,44 @@
+{
+  "name": "swiss",
+  "description": "Editorial / typographic style. Jedna kolumna (620px), duża typografia, 80px oddech, ostre krawędzie. Dla: landingów, stron produktów, artykułów, formularzy.",
+  "layout": "Swiss.astro",
+  "base_css": "swiss.css",
+  "max_width": "620px",
+  "components": {
+    "Card": {
+      "file": "Card.astro",
+      "description": "Kontener z prostym obramowaniem 1.5px, bez zaokrągleń, bez cienia",
+      "props": {
+        "title": { "type": "string", "required": false, "description": "Opcjonalny nagłówek karty" }
+      },
+      "slots": { "default": "Zawartość karty (dowolny HTML)" },
+      "example": "<Card title=\"O produkcie\">\n  <p>Opis produktu</p>\n</Card>"
+    },
+    "Badge": {
+      "file": "Badge.astro",
+      "description": "Pill z kolorem — status tak/nie, zielony/czerwony lub neutralny",
+      "props": {
+        "variant": { "type": "yes|no|green|red", "required": false, "description": "Kolor badge'a" },
+        "label": { "type": "string", "required": false, "description": "Tekst badge'a" }
+      },
+      "slots": { "default": "Tekst badge'a (zamiast prop label)" },
+      "example": "<Badge variant=\"yes\">Dostępny</Badge>"
+    },
+    "StatGrid": {
+      "file": "StatGrid.astro",
+      "description": "Rząd dużych liczb z opisami, rozdzielony górną linią — editorial stats",
+      "props": {
+        "items": { "type": "Array<{value: string, label: string}>", "required": true, "description": "Lista statystyk" }
+      },
+      "example": "<StatGrid items={[\n  {value: \"0 zł\", label: \"koszt sklepu\"},\n  {value: \"10 min\", label: \"czas startu\"}\n]} />"
+    },
+    "Steps": {
+      "file": "Steps.astro",
+      "description": "Numerowana lista kroków w gridzie — onboarding, how-to, tutorial",
+      "props": {
+        "items": { "type": "Array<{num: string, text: string}>", "required": true, "description": "Kroki (numer + opis, text może zawierać HTML)" }
+      },
+      "example": "<Steps items={[\n  {num: \"01\", text: \"Skopiuj <strong>Google Sheet</strong>\"},\n  {num: \"02\", text: \"Kliknij Stwórz sklep\"},\n  {num: \"03\", text: \"Klient kupuje, płaci na Twoje konto\"}\n]} />"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+---
+/**
+ * ScoreBar — wizualna belka punktacji (0–max)
+ * @prop {number} score - aktualny wynik
+ * @prop {number} max - maksymalny wynik (domyślnie 14)
+ * @prop {"sm"|"md"} size - rozmiar belki (domyślnie "sm")
+ */
+const { score, max = 14, size = 'sm' } = Astro.props;
+const level = score >= 8 ? 'high' : score >= 5 ? 'mid' : 'low';
+---
+<div class:list={["score-bar", size]}>
+  {Array.from({length: max}, (_, i) => (
+    <span class:list={[i < score && level]} />
+  ))}
+</div>
+
+<style>
+  .score-bar { display: flex; gap: 3px; align-items: center; }
+  span { width: 14px; height: 22px; background: var(--border); border-radius: 3px; }
+  .md span { width: 24px; height: 32px; gap: 4px; }
+  .high { background: hsl(142 71% 45%); }
+  .mid  { background: hsl(38 92% 50%); }
+  .low  { background: hsl(0 84% 60%); }
+
+  @media(prefers-color-scheme:dark) {
+    :global(:root:not([data-theme="light"])) span { background: hsl(240 3.7% 20%); }
+    :global(:root:not([data-theme="light"])) .high { background: hsl(142 60% 40%); }
+    :global(:root:not([data-theme="light"])) .mid  { background: hsl(38 80% 45%); }
+    :global(:root:not([data-theme="light"])) .low  { background: hsl(0 70% 50%); }
+  }
+  :global([data-theme="dark"]) span { background: hsl(240 3.7% 20%); }
+  :global([data-theme="dark"]) .high { background: hsl(142 60% 40%); }
+  :global([data-theme="dark"]) .mid  { background: hsl(38 80% 45%); }
+  :global([data-theme="dark"]) .low  { background: hsl(0 70% 50%); }
+</style>

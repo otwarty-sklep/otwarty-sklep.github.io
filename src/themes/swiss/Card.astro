@@ -1,0 +1,25 @@
+---
+/**
+ * Card — kontener z prostym obramowaniem, bez zaokrągleń (styl Swiss)
+ * @prop {string} title - opcjonalny nagłówek karty
+ */
+const { title } = Astro.props;
+---
+<article class="card">
+  {title && <h3>{title}</h3>}
+  <slot />
+</article>
+
+<style>
+  .card {
+    border: 1.5px solid var(--border);
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+  h3 {
+    margin: 0 0 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+</style>

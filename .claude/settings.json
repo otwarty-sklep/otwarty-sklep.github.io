@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "themes": {
+      "command": "node",
+      "args": ["../mcp/themes-server.js"]
+    }
+  }
+}

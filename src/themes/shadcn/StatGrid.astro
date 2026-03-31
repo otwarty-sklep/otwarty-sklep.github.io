@@ -1,0 +1,43 @@
+---
+/**
+ * StatGrid — grid kart z dużymi liczbami (stats dashboard)
+ * Użycie: <StatGrid items={[{value: "25k", label: "sklepów"}, ...]} />
+ * @prop {Array<{value: string, label: string}>} items - lista statystyk
+ */
+const { items } = Astro.props;
+---
+<section class="stat-grid">
+  {items.map(item => (
+    <article>
+      <strong>{item.value}</strong>
+      <p>{item.label}</p>
+    </article>
+  ))}
+</section>
+
+<style>
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  article {
+    background: var(--card-bg, #fff);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    box-shadow: var(--card-shadow, 0 1px 3px 0 rgb(0 0 0 / 0.06));
+    text-align: center;
+    padding: 1.25rem 1rem;
+  }
+  strong {
+    display: block;
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+  p { margin: 0; font-size: 0.8rem; color: var(--fg-muted); }
+</style>

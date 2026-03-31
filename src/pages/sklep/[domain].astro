@@ -1,5 +1,7 @@
 ---
 import Shadcn from '../../layouts/Shadcn.astro';
+import ScoreBar from '../../themes/shadcn/ScoreBar.astro';
+import Badge from '../../themes/shadcn/Badge.astro';
 import { loadShops } from '../../data/shops.js';
 
 export async function getStaticPaths() {
@@ -23,13 +25,7 @@ const pct = Math.round((shop.score / maxScore) * 100);
 
   <section>
     <h2>Score</h2>
-    <div data-score style="gap: 4px;">
-      {Array.from({length: maxScore}, (_, i) => {
-        const filled = i < shop.score;
-        const fill = filled ? (shop.score >= 8 ? 'high' : shop.score >= 5 ? 'mid' : 'low') : undefined;
-        return <span data-fill={fill} style="width: 24px; height: 32px;"></span>;
-      })}
-    </div>
+    <ScoreBar score={shop.score} max={maxScore} size="md" />
   </section>
 
   <section>
@@ -37,11 +33,11 @@ const pct = Math.round((shop.score / maxScore) * 100);
     <table>
       <tbody>
         <tr><td>Platforma</td><td><strong>{shop.platform || 'nierozpoznana'}</strong></td></tr>
-        <tr><td>Schema.org</td><td><span data-badge={shop.schema_org ? 'yes' : 'no'}>{shop.schema_org ? 'Tak' : 'Brak'}</span></td></tr>
-        <tr><td>JSON-LD Product</td><td><span data-badge={shop.jsonld_product ? 'yes' : 'no'}>{shop.jsonld_product ? 'Tak' : 'Brak'}</span></td></tr>
-        <tr><td>Sitemap</td><td>{shop.resources?.sitemap ? <a href={shop.resources.sitemap} target="_blank">{shop.resources.sitemap}</a> : <span data-badge="no">Brak</span>}</td></tr>
-        <tr><td>Feed</td><td>{shop.resources?.feed ? <a href={shop.resources.feed} target="_blank">{shop.resources.feed}</a> : <span data-badge="no">Brak</span>}</td></tr>
-        <tr><td>UCP</td><td>{shop.resources?.ucp ? <a href={shop.resources.ucp} target="_blank">{shop.resources.ucp}</a> : <span data-badge="no">Brak</span>}</td></tr>
+        <tr><td>Schema.org</td><td><Badge variant={shop.schema_org ? 'yes' : 'no'}>{shop.schema_org ? 'Tak' : 'Brak'}</Badge></td></tr>
+        <tr><td>JSON-LD Product</td><td><Badge variant={shop.jsonld_product ? 'yes' : 'no'}>{shop.jsonld_product ? 'Tak' : 'Brak'}</Badge></td></tr>
+        <tr><td>Sitemap</td><td>{shop.resources?.sitemap ? <a href={shop.resources.sitemap} target="_blank">{shop.resources.sitemap}</a> : <Badge variant="no">Brak</Badge>}</td></tr>
+        <tr><td>Feed</td><td>{shop.resources?.feed ? <a href={shop.resources.feed} target="_blank">{shop.resources.feed}</a> : <Badge variant="no">Brak</Badge>}</td></tr>
+        <tr><td>UCP</td><td>{shop.resources?.ucp ? <a href={shop.resources.ucp} target="_blank">{shop.resources.ucp}</a> : <Badge variant="no">Brak</Badge>}</td></tr>
       </tbody>
     </table>
   </section>
@@ -53,7 +49,7 @@ const pct = Math.round((shop.score / maxScore) * 100);
         <thead><tr><th>Bot</th><th>Status</th></tr></thead>
         <tbody>
           {Object.entries(shop.robots).map(([bot, status]) => (
-            <tr><td>{bot}</td><td><span data-badge={status === 'allow' ? 'yes' : 'no'}>{status}</span></td></tr>
+            <tr><td>{bot}</td><td><Badge variant={status === 'allow' ? 'yes' : 'no'}>{status}</Badge></td></tr>
           ))}
         </tbody>
       </table>

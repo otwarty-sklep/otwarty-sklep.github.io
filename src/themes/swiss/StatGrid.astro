@@ -1,0 +1,41 @@
+---
+/**
+ * StatGrid — rząd dużych liczb z opisami, rozdzielony linią (styl Swiss)
+ * Użycie: <StatGrid items={[{value: "0 zł", label: "koszt sklepu"}, ...]} />
+ * @prop {Array<{value: string, label: string}>} items - lista statystyk
+ */
+const { items } = Astro.props;
+---
+<div class="stat-grid">
+  {items.map(item => (
+    <div>
+      <strong>{item.value}</strong>
+      <span>{item.label}</span>
+    </div>
+  ))}
+</div>
+
+<style>
+  .stat-grid {
+    border-top: 1px solid var(--border);
+    padding-top: 28px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 28px;
+    margin-bottom: 80px;
+  }
+  strong {
+    display: block;
+    font-size: 2.25rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1;
+    margin-bottom: 6px;
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+  span { font-size: 14px; color: var(--fg-muted); line-height: 1.5; }
+
+  @media(max-width:520px) {
+    .stat-grid { grid-template-columns: 1fr; margin-bottom: 48px; }
+  }
+</style>

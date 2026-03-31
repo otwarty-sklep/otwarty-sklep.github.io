@@ -1,0 +1,44 @@
+---
+/**
+ * Steps — numerowana lista kroków w gridzie (styl Swiss, editorial)
+ * Użycie: <Steps items={[{num: "01", text: "Skopiuj arkusz..."}, ...]} />
+ * @prop {Array<{num: string, text: string}>} items - kroki (numer + opis HTML)
+ */
+const { items } = Astro.props;
+---
+<dl class="steps">
+  {items.map(item => (
+    <Fragment>
+      <dt>{item.num}</dt>
+      <dd set:html={item.text} />
+    </Fragment>
+  ))}
+</dl>
+
+<style>
+  .steps {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    margin: 0 0 80px;
+    border-top: 1.5px solid var(--border-strong, var(--border));
+  }
+  dt {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--fg-muted);
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+  dd {
+    font-size: 16px;
+    line-height: 1.75;
+    padding: 20px 0 20px 12px;
+    border-bottom: 1px solid var(--border);
+    text-wrap: pretty;
+  }
+
+  @media(max-width:520px) {
+    .steps { margin-bottom: 48px; }
+  }
+</style>
