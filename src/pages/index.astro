@@ -1,69 +1,144 @@
 ---
-import Base from '../layouts/Base.astro';
-import { getStats, loadShops } from '../data/shops.js';
-
-const stats = await getStats();
-const shops = await loadShops();
-const topShops = shops.filter(s => s.score >= 6).sort((a, b) => b.score - a.score).slice(0, 20);
+// Landing — Otwarty Sklep: darmowy sklep w 10 minut
 ---
-<Base title="Index polskich sklepów">
-  <hgroup>
-    <h1>Index polskich sklepów</h1>
-    <p>{stats.total.toLocaleString('pl')} sklepów przeskanowanych pod kątem AI readiness</p>
-  </hgroup>
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Otwarty Sklep — darmowy sklep internetowy w 10 minut</title>
+<meta name="description" content="Postaw sklep internetowy za 0 zł. Wystarczy konto Google. Widoczny dla AI agentów od dnia 1. ChatGPT, Google AI, Von Halsky.">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    color:hsl(240 10% 3.9%);background:#fff;font-size:16px;line-height:1.75;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    font-feature-settings:'kern','liga','calt';letter-spacing:-0.011em
+  }
+  .page{max-width:620px;margin:0 auto;padding:80px 24px 72px}
+  .top{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:16px;border-bottom:1.5px solid hsl(240 10% 3.9%);margin-bottom:80px}
+  .logo{font-size:13px;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
+  .tag{font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:hsl(240 3.8% 46.1%)}
+  h1{font-size:clamp(32px,5.5vw,48px);font-weight:800;line-height:1.1;letter-spacing:-0.03em;margin-bottom:32px;text-wrap:balance;color:hsl(240 10% 3.9%)}
+  mark{background:transparent;color:inherit;background-image:linear-gradient(120deg,hsl(142 76% 80%) 0%,hsl(142 76% 70%) 100%);background-repeat:no-repeat;background-size:100% 40%;background-position:0 85%;padding:0 2px}
+  .lead{font-size:20px;line-height:1.6;letter-spacing:-0.011em;color:hsl(240 3.8% 46.1%);margin-bottom:72px;text-wrap:pretty}
+  .grid{display:grid;grid-template-columns:36px 1fr;margin-bottom:80px;border-top:1.5px solid hsl(240 10% 3.9%)}
+  .grid-num{font-size:14px;font-weight:600;padding:20px 0;border-bottom:1px solid hsl(240 5.9% 90%);color:hsl(240 3.8% 46.1%);font-variant-numeric:lining-nums tabular-nums}
+  .grid-text{font-size:16px;line-height:1.75;padding:20px 0 20px 12px;border-bottom:1px solid hsl(240 5.9% 90%);text-wrap:pretty}
+  .form-section{border-top:1.5px solid hsl(240 10% 3.9%);padding-top:40px;margin-bottom:80px}
+  .form-label{font-size:14px;font-weight:600;letter-spacing:-0.011em;margin-bottom:20px}
+  form{display:flex;gap:0;max-width:460px}
+  input[type="email"]{flex:1;padding:14px 16px;border:1.5px solid hsl(240 10% 3.9%);border-right:none;border-radius:6px 0 0 6px;font-size:15px;font-family:inherit;letter-spacing:-0.011em;outline:none;background:#fff;color:hsl(240 10% 3.9%)}
+  input[type="email"]::placeholder{color:hsl(240 3.8% 64%)}
+  input[type="email"]:focus{box-shadow:0 0 0 2px hsl(240 5.9% 80%)}
+  button{background:hsl(240 10% 3.9%);color:hsl(0 0% 98%);border:1.5px solid hsl(240 10% 3.9%);border-radius:0 6px 6px 0;padding:14px 28px;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;white-space:nowrap}
+  button:hover{opacity:.85}
+  .form-note{font-size:14px;color:hsl(240 3.8% 46.1%);margin-top:12px}
+  .compare{margin-bottom:80px}
+  .compare-label{font-size:14px;font-weight:600;margin-bottom:16px}
+  table{width:100%;border-collapse:collapse}
+  th{text-align:left;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:12px 12px 12px 0;border-bottom:1.5px solid hsl(240 10% 3.9%)}
+  td{padding:12px 12px 12px 0;border-bottom:1px solid hsl(240 5.9% 90%);font-size:14px;color:hsl(240 3.8% 46.1%);line-height:1.5}
+  td:first-child{color:hsl(240 3.8% 64%);font-size:13px}
+  .us{color:hsl(240 10% 3.9%);font-weight:700}
+  .channels{display:flex;gap:32px;flex-wrap:wrap;margin-bottom:80px}
+  .channel{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:hsl(240 5.9% 78%)}
+  .stat{border-top:1px solid hsl(240 5.9% 90%);padding-top:28px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px;margin-bottom:80px}
+  .stat-num{font-size:36px;font-weight:800;letter-spacing:-0.025em;line-height:1;margin-bottom:6px;font-variant-numeric:lining-nums tabular-nums}
+  .stat-label{font-size:14px;color:hsl(240 3.8% 46.1%);line-height:1.5}
+  .links{border-top:1px solid hsl(240 5.9% 90%);padding-top:28px;display:flex;gap:24px;flex-wrap:wrap}
+  .links a{font-size:13px;font-weight:500;color:hsl(240 3.8% 46.1%);text-decoration:none;letter-spacing:-0.01em}
+  .links a:hover{color:hsl(240 10% 3.9%)}
+  @media(max-width:520px){
+    .page{padding:48px 20px}
+    .top{margin-bottom:56px}
+    h1{margin-bottom:24px}
+    .lead{font-size:18px;margin-bottom:48px}
+    .grid{margin-bottom:48px}
+    form{flex-direction:column}
+    input[type="email"]{border-right:1.5px solid hsl(240 10% 3.9%);border-bottom:none;border-radius:6px 6px 0 0}
+    button{border-radius:0 0 6px 6px;width:100%}
+    .stat{grid-template-columns:1fr;gap:20px}
+  }
+</style>
+</head>
+<body>
+<div class="page">
 
-  <section data-grid>
-    <article>
-      <strong>{stats.total.toLocaleString('pl')}</strong>
-      <p>sklepów</p>
-    </article>
-    <article>
-      <strong>{stats.withSchema.toLocaleString('pl')}</strong>
-      <p>ze schema.org ({Math.round(stats.withSchema / stats.total * 100)}%)</p>
-    </article>
-    <article>
-      <strong>{stats.withSitemap.toLocaleString('pl')}</strong>
-      <p>z sitemap ({Math.round(stats.withSitemap / stats.total * 100)}%)</p>
-    </article>
-    <article>
-      <strong>{stats.withFeed.toLocaleString('pl')}</strong>
-      <p>z feedem produktowym ({Math.round(stats.withFeed / stats.total * 100)}%)</p>
-    </article>
-  </section>
+  <div class="top">
+    <div class="logo">Otwarty Sklep</div>
+    <div class="tag">Za darmo. Na zawsze.</div>
+  </div>
 
-  <h2>Top sklepy (score ≥ 6)</h2>
-  <figure>
+  <h1>Sklep internetowy w <mark>10 minut</mark> za <mark>0 złotych</mark></h1>
+
+  <p class="lead">
+    Wystarczy konto Google. Wpisujesz produkty w arkusz — my stawiamy sklep.
+    Widoczny dla ChatGPT, Google AI i Von Halsky <mark>od pierwszego dnia</mark>.
+    Bez abonamentu. Bez prowizji. Bez haczyków.
+  </p>
+
+  <div class="grid">
+    <div class="grid-num">01</div>
+    <div class="grid-text">Skopiuj nasz <strong>Google Sheet</strong> i wpisz produkty — nazwę, cenę, opis, zdjęcie. <mark>Znasz Excel? Umiesz to</mark></div>
+    <div class="grid-num">02</div>
+    <div class="grid-text">Kliknij "Stwórz sklep" — automatycznie powstaje strona z produktami, <mark>widoczna dla AI agentów</mark> zakupowych</div>
+    <div class="grid-num">03</div>
+    <div class="grid-text">Klient kupuje, płaci na Twoje konto. <mark>Zero pośredników</mark>. Dane i pieniądze — Twoje</div>
+  </div>
+
+  <div class="form-section">
+    <div class="form-label">Zostaw email — dostaniesz zaproszenie do beta</div>
+    <form action="https://formspree.io/f/TWOJ_ID" method="POST">
+      <input type="hidden" name="_landing" value="main-free-shop">
+      <input type="email" name="email" placeholder="twoj@email.pl" required>
+      <button type="submit">Chcę sklep za darmo</button>
+    </form>
+    <div class="form-note">Bez spamu. Odpisujemy osobiście.</div>
+  </div>
+
+  <div class="compare">
+    <div class="compare-label">Porównanie</div>
     <table>
-      <thead>
-        <tr>
-          <th>Domena</th>
-          <th>Platforma</th>
-          <th>Score</th>
-          <th>Schema.org</th>
-          <th>Sitemap</th>
-          <th>Feed</th>
-        </tr>
-      </thead>
-      <tbody>
-        {topShops.map(s => (
-          <tr>
-            <td><a href={`/sklep/${s.domain}/`}>{s.domain}</a></td>
-            <td>{s.platform || '—'}</td>
-            <td>
-              <div data-score>
-                {Array.from({length: 14}, (_, i) => {
-                  const filled = i < s.score;
-                  const fill = filled ? (s.score >= 8 ? 'high' : s.score >= 5 ? 'mid' : 'low') : undefined;
-                  return <span data-fill={fill}></span>;
-                })}
-              </div>
-            </td>
-            <td><span data-badge={s.schema_org ? 'yes' : 'no'}>{s.schema_org ? 'tak' : 'nie'}</span></td>
-            <td><span data-badge={s.resources?.sitemap ? 'yes' : 'no'}>{s.resources?.sitemap ? 'tak' : 'nie'}</span></td>
-            <td><span data-badge={s.resources?.feed ? 'yes' : 'no'}>{s.resources?.feed ? 'tak' : 'nie'}</span></td>
-          </tr>
-        ))}
-      </tbody>
+      <tr><th></th><th>Otwarty Sklep</th><th>Shoper</th><th>Shopify</th><th>Allegro</th></tr>
+      <tr><td>Koszt</td><td class="us">0 zł</td><td>od 100 zł/mies</td><td>od $29/mies</td><td>8-12%</td></tr>
+      <tr><td>Czas startu</td><td class="us">10 minut</td><td>godziny</td><td>godziny</td><td>dni</td></tr>
+      <tr><td>Widoczność AI</td><td class="us">od dnia 1</td><td>brak</td><td>częściowo</td><td>tylko Allegro</td></tr>
+      <tr><td>Twoje dane</td><td class="us">tak</td><td>na ich serwerze</td><td>na ich serwerze</td><td>ich własność</td></tr>
+      <tr><td>Prowizja</td><td class="us">0%</td><td>0% + abonament</td><td>0.5-2%</td><td>8-12%</td></tr>
     </table>
-  </figure>
-</Base>
+  </div>
+
+  <div class="channels">
+    <span class="channel">Google AI</span>
+    <span class="channel">ChatGPT</span>
+    <span class="channel">Von Halsky</span>
+    <span class="channel">Copilot</span>
+    <span class="channel">Perplexity</span>
+  </div>
+
+  <div class="stat">
+    <div>
+      <div class="stat-num">0 zł</div>
+      <div class="stat-label">koszt sklepu — na zawsze</div>
+    </div>
+    <div>
+      <div class="stat-num">10 min</div>
+      <div class="stat-label">od zera do działającego sklepu</div>
+    </div>
+    <div>
+      <div class="stat-num">7</div>
+      <div class="stat-label">kanałów AI automatycznie</div>
+    </div>
+  </div>
+
+  <div class="links">
+    <a href="/index-sklepow/">Index 23 000 sklepów</a>
+    <a href="/landing/">Landing A/B test</a>
+    <a href="https://github.com/otwarty-sklep">GitHub</a>
+  </div>
+
+</div>
+</body>
+</html>
