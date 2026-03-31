@@ -189,6 +189,18 @@ const pageDesc = description || 'Index polskich sklepów internetowych. AI readi
     [data-badge="yes"] { background: hsl(142 76% 94%); color: hsl(142 71% 29%); }
     [data-badge="no"] { background: hsl(0 93% 94%); color: hsl(0 84% 35%); }
 
+    /* --- columns grid --- */
+    [data-cols] { display: grid; gap: 1.5rem; }
+    [data-cols="2"] { grid-template-columns: repeat(2, 1fr); }
+    [data-cols="3"] { grid-template-columns: repeat(3, 1fr); }
+    [data-cols="4"] { grid-template-columns: repeat(4, 1fr); }
+    @media (max-width: 768px) {
+      [data-cols="3"], [data-cols="4"] { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      [data-cols] { grid-template-columns: 1fr; }
+    }
+
     /* --- ul inside section: recommendation list --- */
     section > ul { padding-left: 1.25rem; }
     section > ul li { margin-bottom: 0.75rem; font-size: 0.9rem; }
