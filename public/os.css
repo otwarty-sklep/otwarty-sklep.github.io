@@ -85,17 +85,30 @@ html {
   -webkit-text-size-adjust: 100%;
   -moz-tab-size: 4;
   tab-size: 4;
+  hanging-punctuation: first allow-end last;
 }
 
 body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    sans-serif;
   line-height: 1.6;
   color: var(--fg);
   background: var(--bg);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   font-optical-sizing: auto;
-  font-feature-settings: 'cv01', 'cv02', 'ss01';
+  font-feature-settings: 'kern', 'liga', 'calt', 'ss01';
+  font-variant-ligatures: common-ligatures contextual;
+  letter-spacing: -0.011em;
+  word-spacing: 0.01em;
 }
 
 /* --- container --- */
@@ -107,20 +120,25 @@ body {
 }
 
 /* --- typography --- */
+h1, h2, h3 {
+  text-wrap: balance;
+  font-variant-numeric: lining-nums;
+}
+
 h1 {
   font-size: clamp(1.75rem, 4vw, 2.25rem);
   font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
   color: var(--fg);
   margin-bottom: 0.5rem;
 }
 
 h2 {
   font-size: 1.15rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.3;
+  font-weight: 650;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
   color: var(--fg);
   margin-top: 2.5rem;
   margin-bottom: 1rem;
@@ -130,8 +148,8 @@ h2 {
 
 h3 {
   font-size: 1rem;
-  font-weight: 600;
-  letter-spacing: -0.015em;
+  font-weight: 620;
+  letter-spacing: -0.02em;
   color: var(--fg);
   margin-top: 1.5rem;
   margin-bottom: 0.5rem;
@@ -140,11 +158,16 @@ h3 {
 p {
   margin-bottom: 1rem;
   color: var(--fg);
+  text-wrap: pretty;
 }
 
-small { font-size: 0.8rem; color: var(--fg-muted); }
+small {
+  font-size: 0.8rem;
+  color: var(--fg-muted);
+  letter-spacing: 0;
+}
 
-strong { font-weight: 600; }
+strong { font-weight: 650; }
 
 mark {
   background: transparent;
@@ -238,11 +261,12 @@ th {
   text-align: left;
   font-size: 0.7rem;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--fg-muted);
   padding: 0.6rem 1rem;
   border-bottom: 1px solid var(--fg);
+  font-variant-numeric: lining-nums tabular-nums;
 }
 
 td {
