@@ -1,0 +1,54 @@
+---
+const { title, description } = Astro.props;
+const pageTitle = title ? `${title} — Otwarty Sklep` : 'Otwarty Sklep';
+const pageDesc = description || 'Index polskich sklepów internetowych. AI readiness score, schema.org, feedy produktowe.';
+---
+<!DOCTYPE html>
+<html lang="pl" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{pageTitle}</title>
+  <meta name="description" content={pageDesc}>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  <style>
+    :root { --pico-font-size: 16px; }
+    .score-bar { display: flex; gap: 2px; }
+    .score-bar span {
+      width: 12px; height: 20px;
+      background: var(--pico-muted-border-color);
+      border-radius: 2px;
+    }
+    .score-bar span.filled { background: var(--pico-primary); }
+    .score-bar span.high { background: #2ecc71; }
+    .score-bar span.mid { background: #f39c12; }
+    .score-bar span.low { background: #e74c3c; }
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.8em;
+      background: var(--pico-muted-border-color);
+    }
+    .badge.yes { background: #d5f5e3; color: #1e8449; }
+    .badge.no { background: #fadbd8; color: #922b21; }
+    .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
+    .stat-card { text-align: center; }
+    .stat-card strong { display: block; font-size: 2rem; }
+  </style>
+</head>
+<body>
+  <nav class="container">
+    <ul><li><a href="/frontend/"><strong>Otwarty Sklep</strong></a></li></ul>
+    <ul>
+      <li><a href="/frontend/">Index</a></li>
+    </ul>
+  </nav>
+  <main class="container">
+    <slot />
+  </main>
+  <footer class="container">
+    <small>Otwarty Sklep — agregator dystrybucji do AI agentów zakupowych</small>
+  </footer>
+</body>
+</html>

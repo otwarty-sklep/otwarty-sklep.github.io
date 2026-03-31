@@ -1,0 +1,69 @@
+---
+import Base from '../layouts/Base.astro';
+import { getStats, loadShops } from '../data/shops.js';
+
+const stats = await getStats();
+const shops = await loadShops();
+const topShops = shops.filter(s => s.score >= 6).sort((a, b) => b.score - a.score).slice(0, 20);
+---
+<Base title="Index polskich sklepów">
+  <hgroup>
+    <h1>Index polskich sklepów</h1>
+    <p>{stats.total.toLocaleString('pl')} sklepów przeskanowanych pod kątem AI readiness</p>
+  </hgroup>
+
+  <section class="stat-grid">
+    <article class="stat-card">
+      <strong>{stats.total.toLocaleString('pl')}</strong>
+      <p>sklepów</p>
+    </article>
+    <article class="stat-card">
+      <strong>{stats.withSchema.toLocaleString('pl')}</strong>
+      <p>ze schema.org ({Math.round(stats.withSchema / stats.total * 100)}%)</p>
+    </article>
+    <article class="stat-card">
+      <strong>{stats.withSitemap.toLocaleString('pl')}</strong>
+      <p>z sitemap ({Math.round(stats.withSitemap / stats.total * 100)}%)</p>
+    </article>
+    <article class="stat-card">
+      <strong>{stats.withFeed.toLocaleString('pl')}</strong>
+      <p>z feedem produktowym ({Math.round(stats.withFeed / stats.total * 100)}%)</p>
+    </article>
+  </section>
+
+  <h2>Top sklepy (score ≥ 6)</h2>
+  <figure>
+    <table>
+      <thead>
+        <tr>
+          <th>Domena</th>
+          <th>Platforma</th>
+          <th>Score</th>
+          <th>Schema.org</th>
+          <th>Sitemap</th>
+          <th>Feed</th>
+        </tr>
+      </thead>
+      <tbody>
+        {topShops.map(s => (
+          <tr>
+            <td><a href={`/frontend/sklep/${s.domain}/`}>{s.domain}</a></td>
+            <td>{s.platform || '—'}</td>
+            <td>
+              <div class="score-bar">
+                {Array.from({length: 14}, (_, i) => {
+                  const filled = i < s.score;
+                  const cls = filled ? (s.score >= 8 ? 'filled high' : s.score >= 5 ? 'filled mid' : 'filled low') : '';
+                  return <span class={cls}></span>;
+                })}
+              </div>
+            </td>
+            <td><span class={`badge ${s.schema_org ? 'yes' : 'no'}`}>{s.schema_org ? 'tak' : 'nie'}</span></td>
+            <td><span class={`badge ${s.resources?.sitemap ? 'yes' : 'no'}`}>{s.resources?.sitemap ? 'tak' : 'nie'}</span></td>
+            <td><span class={`badge ${s.resources?.feed ? 'yes' : 'no'}`}>{s.resources?.feed ? 'tak' : 'nie'}</span></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </figure>
+</Base>

@@ -1,0 +1,13 @@
+{
+  "name": "otwarty-sklep-frontend",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.7.10",
+    "@picocss/pico": "^2.1.1"
+  }
+}

@@ -1,0 +1,122 @@
+---
+import Base from '../../layouts/Base.astro';
+import { loadShops } from '../../data/shops.js';
+
+export async function getStaticPaths() {
+  const shops = await loadShops();
+  // Score >= 6 — reszta to premium
+  return shops.filter(s => s.score >= 6).map(s => ({
+    params: { domain: s.domain },
+    props: { shop: s },
+  }));
+}
+
+const { shop } = Astro.props;
+const maxScore = 14;
+const pct = Math.round((shop.score / maxScore) * 100);
+---
+<Base title={shop.domain} description={`AI readiness score: ${shop.score}/${maxScore} dla ${shop.domain}`}>
+  <hgroup>
+    <h1>{shop.domain}</h1>
+    <p>AI readiness: {shop.score}/{maxScore} punktów ({pct}%)</p>
+  </hgroup>
+
+  <section>
+    <h2>Score</h2>
+    <div class="score-bar" style="gap: 4px;">
+      {Array.from({length: maxScore}, (_, i) => {
+        const filled = i < shop.score;
+        const cls = filled ? (shop.score >= 8 ? 'filled high' : shop.score >= 5 ? 'filled mid' : 'filled low') : '';
+        return <span class={cls} style="width: 24px; height: 32px;"></span>;
+      })}
+    </div>
+  </section>
+
+  <section>
+    <h2>Metryki</h2>
+    <table>
+      <tbody>
+        <tr>
+          <td>Platforma</td>
+          <td><strong>{shop.platform || 'nierozpoznana'}</strong></td>
+        </tr>
+        <tr>
+          <td>Schema.org</td>
+          <td><span class={`badge ${shop.schema_org ? 'yes' : 'no'}`}>{shop.schema_org ? 'Tak' : 'Brak'}</span></td>
+        </tr>
+        <tr>
+          <td>JSON-LD Product</td>
+          <td><span class={`badge ${shop.jsonld_product ? 'yes' : 'no'}`}>{shop.jsonld_product ? 'Tak' : 'Brak'}</span></td>
+        </tr>
+        <tr>
+          <td>Sitemap</td>
+          <td>
+            {shop.resources?.sitemap
+              ? <a href={shop.resources.sitemap} target="_blank">{shop.resources.sitemap}</a>
+              : <span class="badge no">Brak</span>
+            }
+          </td>
+        </tr>
+        <tr>
+          <td>Feed produktowy</td>
+          <td>
+            {shop.resources?.feed
+              ? <a href={shop.resources.feed} target="_blank">{shop.resources.feed}</a>
+              : <span class="badge no">Brak</span>
+            }
+          </td>
+        </tr>
+        <tr>
+          <td>UCP endpoint</td>
+          <td>
+            {shop.resources?.ucp
+              ? <a href={shop.resources.ucp} target="_blank">{shop.resources.ucp}</a>
+              : <span class="badge no">Brak</span>
+            }
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  {shop.category && (
+    <section>
+      <h2>Kategoria</h2>
+      <p>{shop.category.path || shop.category.pl}</p>
+    </section>
+  )}
+
+  {shop.robots && (
+    <section>
+      <h2>Polityka botów AI</h2>
+      <table>
+        <thead>
+          <tr><th>Bot</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          {Object.entries(shop.robots).map(([bot, status]) => (
+            <tr>
+              <td>{bot}</td>
+              <td><span class={`badge ${status === 'allow' ? 'yes' : 'no'}`}>{status}</span></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+  )}
+
+  <section>
+    <h2>Co ten sklep powinien zrobić</h2>
+    <ul>
+      {!shop.schema_org && <li><strong>Dodać schema.org/Product</strong> — JSON-LD na stronach produktów. Bez tego ChatGPT i Perplexity nie widzą produktów.</li>}
+      {!shop.jsonld_product && shop.schema_org && <li><strong>Dodać JSON-LD Product</strong> — ma schema.org ale brakuje typu Product. Trzeba dodać pola: name, price, availability.</li>}
+      {!shop.resources?.sitemap && <li><strong>Dodać sitemap.xml</strong> — crawlery AI nie wiedzą jakie strony istnieją.</li>}
+      {!shop.resources?.feed && <li><strong>Wygenerować feed produktowy</strong> — wymagany do Google Merchant Center i Bing.</li>}
+      {shop.score >= 6 && <li><strong>Zarejestrować się w Google Merchant Center</strong> — ma wystarczające dane żeby pojawić się w Gemini/AI Mode.</li>}
+    </ul>
+  </section>
+
+  <footer>
+    <p><a href={`https://${shop.domain}`} target="_blank">Otwórz sklep →</a></p>
+  </footer>
+</Base>
