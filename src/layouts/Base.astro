@@ -1,4 +1,9 @@
 ---
+import { readFileSync } from 'fs';
+import { resolve } from 'path';
+
+const css = readFileSync(resolve(import.meta.dirname, '../../public/os.css'), 'utf-8');
+
 const { title, description } = Astro.props;
 const pageTitle = title ? `${title} — Otwarty Sklep` : 'Otwarty Sklep';
 const pageDesc = description || 'Index polskich sklepów internetowych. AI readiness score, schema.org, feedy produktowe.';
@@ -10,7 +15,7 @@ const pageDesc = description || 'Index polskich sklepów internetowych. AI readi
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{pageTitle}</title>
   <meta name="description" content={pageDesc}>
-  <link rel="stylesheet" href="/os.css">
+  <style set:html={css}></style>
 </head>
 <body>
   <nav class="container">
