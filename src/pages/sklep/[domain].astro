@@ -25,11 +25,11 @@ const pct = Math.round((shop.score / maxScore) * 100);
 
   <section>
     <h2>Score</h2>
-    <div class="score-bar" style="gap: 4px;">
+    <div data-score style="gap: 4px;">
       {Array.from({length: maxScore}, (_, i) => {
         const filled = i < shop.score;
-        const cls = filled ? (shop.score >= 8 ? 'filled high' : shop.score >= 5 ? 'filled mid' : 'filled low') : '';
-        return <span class={cls} style="width: 24px; height: 32px;"></span>;
+        const fill = filled ? (shop.score >= 8 ? 'high' : shop.score >= 5 ? 'mid' : 'low') : undefined;
+        return <span data-fill={fill} style="width: 24px; height: 32px;"></span>;
       })}
     </div>
   </section>
@@ -44,18 +44,18 @@ const pct = Math.round((shop.score / maxScore) * 100);
         </tr>
         <tr>
           <td>Schema.org</td>
-          <td><span class={`badge ${shop.schema_org ? 'yes' : 'no'}`}>{shop.schema_org ? 'Tak' : 'Brak'}</span></td>
+          <td><span data-badge={shop.schema_org ? 'yes' : 'no'}>{shop.schema_org ? 'Tak' : 'Brak'}</span></td>
         </tr>
         <tr>
           <td>JSON-LD Product</td>
-          <td><span class={`badge ${shop.jsonld_product ? 'yes' : 'no'}`}>{shop.jsonld_product ? 'Tak' : 'Brak'}</span></td>
+          <td><span data-badge={shop.jsonld_product ? 'yes' : 'no'}>{shop.jsonld_product ? 'Tak' : 'Brak'}</span></td>
         </tr>
         <tr>
           <td>Sitemap</td>
           <td>
             {shop.resources?.sitemap
               ? <a href={shop.resources.sitemap} target="_blank">{shop.resources.sitemap}</a>
-              : <span class="badge no">Brak</span>
+              : <span data-badge="no">Brak</span>
             }
           </td>
         </tr>
@@ -64,7 +64,7 @@ const pct = Math.round((shop.score / maxScore) * 100);
           <td>
             {shop.resources?.feed
               ? <a href={shop.resources.feed} target="_blank">{shop.resources.feed}</a>
-              : <span class="badge no">Brak</span>
+              : <span data-badge="no">Brak</span>
             }
           </td>
         </tr>
@@ -73,7 +73,7 @@ const pct = Math.round((shop.score / maxScore) * 100);
           <td>
             {shop.resources?.ucp
               ? <a href={shop.resources.ucp} target="_blank">{shop.resources.ucp}</a>
-              : <span class="badge no">Brak</span>
+              : <span data-badge="no">Brak</span>
             }
           </td>
         </tr>
@@ -99,7 +99,7 @@ const pct = Math.round((shop.score / maxScore) * 100);
           {Object.entries(shop.robots).map(([bot, status]) => (
             <tr>
               <td>{bot}</td>
-              <td><span class={`badge ${status === 'allow' ? 'yes' : 'no'}`}>{status}</span></td>
+              <td><span data-badge={status === 'allow' ? 'yes' : 'no'}>{status}</span></td>
             </tr>
           ))}
         </tbody>

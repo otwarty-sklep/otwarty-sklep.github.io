@@ -12,20 +12,20 @@ const topShops = shops.filter(s => s.score >= 6).sort((a, b) => b.score - a.scor
     <p>{stats.total.toLocaleString('pl')} sklepów przeskanowanych pod kątem AI readiness</p>
   </hgroup>
 
-  <section class="stat-grid">
-    <article class="stat-card">
+  <section data-grid>
+    <article>
       <strong>{stats.total.toLocaleString('pl')}</strong>
       <p>sklepów</p>
     </article>
-    <article class="stat-card">
+    <article>
       <strong>{stats.withSchema.toLocaleString('pl')}</strong>
       <p>ze schema.org ({Math.round(stats.withSchema / stats.total * 100)}%)</p>
     </article>
-    <article class="stat-card">
+    <article>
       <strong>{stats.withSitemap.toLocaleString('pl')}</strong>
       <p>z sitemap ({Math.round(stats.withSitemap / stats.total * 100)}%)</p>
     </article>
-    <article class="stat-card">
+    <article>
       <strong>{stats.withFeed.toLocaleString('pl')}</strong>
       <p>z feedem produktowym ({Math.round(stats.withFeed / stats.total * 100)}%)</p>
     </article>
@@ -50,17 +50,17 @@ const topShops = shops.filter(s => s.score >= 6).sort((a, b) => b.score - a.scor
             <td><a href={`/sklep/${s.domain}/`}>{s.domain}</a></td>
             <td>{s.platform || '—'}</td>
             <td>
-              <div class="score-bar">
+              <div data-score>
                 {Array.from({length: 14}, (_, i) => {
                   const filled = i < s.score;
-                  const cls = filled ? (s.score >= 8 ? 'filled high' : s.score >= 5 ? 'filled mid' : 'filled low') : '';
-                  return <span class={cls}></span>;
+                  const fill = filled ? (s.score >= 8 ? 'high' : s.score >= 5 ? 'mid' : 'low') : undefined;
+                  return <span data-fill={fill}></span>;
                 })}
               </div>
             </td>
-            <td><span class={`badge ${s.schema_org ? 'yes' : 'no'}`}>{s.schema_org ? 'tak' : 'nie'}</span></td>
-            <td><span class={`badge ${s.resources?.sitemap ? 'yes' : 'no'}`}>{s.resources?.sitemap ? 'tak' : 'nie'}</span></td>
-            <td><span class={`badge ${s.resources?.feed ? 'yes' : 'no'}`}>{s.resources?.feed ? 'tak' : 'nie'}</span></td>
+            <td><span data-badge={s.schema_org ? 'yes' : 'no'}>{s.schema_org ? 'tak' : 'nie'}</span></td>
+            <td><span data-badge={s.resources?.sitemap ? 'yes' : 'no'}>{s.resources?.sitemap ? 'tak' : 'nie'}</span></td>
+            <td><span data-badge={s.resources?.feed ? 'yes' : 'no'}>{s.resources?.feed ? 'tak' : 'nie'}</span></td>
           </tr>
         ))}
       </tbody>
