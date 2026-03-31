@@ -449,6 +449,80 @@ pre code {
 [data-theme="dark"] [data-badge="no"],
 [data-theme="dark"] [data-badge="red"] { background: hsl(0 50% 14%); color: hsl(0 84% 70%); }
 
+/* --- inline form (fieldset wraps input+button) --- */
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0 0 12px 0;
+}
+
+fieldset > form {
+  display: flex;
+  gap: 0;
+  max-width: 460px;
+}
+
+fieldset > form input {
+  flex: 1;
+  border-right: none;
+  border-radius: 6px 0 0 6px;
+  margin-bottom: 0;
+}
+
+fieldset > form button {
+  border-radius: 0 6px 6px 0;
+}
+
+fieldset > legend {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.011em;
+  margin-bottom: 20px;
+  padding: 0;
+}
+
+fieldset > small {
+  display: block;
+  margin-top: 12px;
+}
+
+/* --- section separator (section with border-top) --- */
+section {
+  margin-bottom: 48px;
+}
+
+section + section {
+  border-top: 1.5px solid var(--border-strong);
+  padding-top: 40px;
+}
+
+/* --- table: first column muted, strong for emphasis --- */
+td:first-child {
+  color: var(--fg-faint);
+  font-size: 13px;
+}
+
+td strong {
+  color: var(--fg);
+  font-weight: 700;
+}
+
+/* --- aside: channel/tag strip --- */
+aside {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+
+aside span {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+}
+
 /* --- footer --- */
 footer {
   border-top: 1px solid var(--border);
@@ -473,4 +547,7 @@ footer a:hover { color: var(--fg); }
   h1 + p { font-size: 18px; margin-bottom: 48px; }
   h2 { margin-top: 48px; }
   [data-stat] { grid-template-columns: 1fr; }
+  fieldset > form { flex-direction: column; }
+  fieldset > form input { border-right: 1.5px solid var(--border-strong); border-bottom: none; border-radius: 6px 6px 0 0; }
+  fieldset > form button { border-radius: 0 0 6px 6px; width: 100%; }
 }
