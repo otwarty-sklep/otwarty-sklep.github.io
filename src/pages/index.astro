@@ -47,7 +47,7 @@ const topShops = shops.filter(s => s.score >= 6).sort((a, b) => b.score - a.scor
       <tbody>
         {topShops.map(s => (
           <tr>
-            <td><a href={`/frontend/sklep/${s.domain}/`}>{s.domain}</a></td>
+            <td><a href={`/sklep/${s.domain}/`}>{s.domain}</a></td>
             <td>{s.platform || '—'}</td>
             <td>
               <div class="score-bar">

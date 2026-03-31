@@ -1,0 +1,68 @@
+---
+// Landing A/B selector — plain HTML, no layout
+---
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Otwarty Sklep — A/B</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .c { max-width: 400px; }
+  .logo {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 48px;
+  }
+  h1 {
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+  p {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 48px;
+  }
+  .links { display: flex; flex-direction: column; gap: 12px; }
+  a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border: 2px solid #000;
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: background 0.15s, color 0.15s;
+  }
+  a:hover { background: #000; color: #fff; }
+  a span { font-weight: 400; color: #888; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
+  a:hover span { color: #999; }
+</style>
+</head>
+<body>
+<div class="c">
+  <div class="logo">Otwarty Sklep</div>
+  <h1>A/B Test</h1>
+  <p>Dwie wersje landing page</p>
+  <div class="links">
+    <a href="/landing/a/">Mam sklep, chcę AI <span>Wariant A</span></a>
+    <a href="/landing/b/">Chcę sprzedawać przez AI <span>Wariant B</span></a>
+  </div>
+</div>
+</body>
+</html>

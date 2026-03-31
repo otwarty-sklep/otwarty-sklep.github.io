@@ -4,8 +4,10 @@ import { loadShops } from '../../data/shops.js';
 
 export async function getStaticPaths() {
   const shops = await loadShops();
-  // Score >= 6 — reszta to premium
-  return shops.filter(s => s.score >= 6).map(s => ({
+  // TEST: jeden sklep z najwyższym score
+  // Premium: zmień na shops.filter(s => s.score >= 6) albo shops
+  const sorted = shops.sort((a, b) => b.score - a.score);
+  return sorted.slice(0, 1).map(s => ({
     params: { domain: s.domain },
     props: { shop: s },
   }));

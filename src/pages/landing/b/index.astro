@@ -1,0 +1,307 @@
+---
+// Landing B
+---
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Otwarty Sklep — Sprzedawaj przez AI agentów</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: hsl(0 0% 9%);
+    background: hsl(0 0% 100%);
+    font-size: 16px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-optical-sizing: auto;
+    font-feature-settings: 'cv01', 'cv02', 'ss01';
+    hanging-punctuation: first allow-end last;
+  }
+
+  .page {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 80px 24px 72px;
+  }
+
+  /* --- top --- */
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 16px;
+    border-bottom: 1.5px solid hsl(0 0% 9%);
+    margin-bottom: 80px;
+  }
+  .logo {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .tag {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: hsl(0 0% 45%);
+  }
+
+  /* --- h1 shadcn-style --- */
+  h1 {
+    font-size: clamp(32px, 5.5vw, 48px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    margin-bottom: 32px;
+    text-wrap: balance;
+    color: hsl(0 0% 4%);
+  }
+
+  /* --- marker --- */
+  mark {
+    background: transparent;
+    color: inherit;
+    background-image: linear-gradient(120deg, hsl(50 100% 80%) 0%, hsl(50 100% 70%) 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 40%;
+    background-position: 0 85%;
+    padding: 0 2px;
+  }
+
+  /* --- lead / intro --- */
+  .lead {
+    font-size: 20px;
+    line-height: 1.6;
+    letter-spacing: -0.011em;
+    color: hsl(0 0% 45%);
+    margin-bottom: 72px;
+    text-wrap: pretty;
+  }
+
+  /* --- grid --- */
+  .grid {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    margin-bottom: 80px;
+    border-top: 1.5px solid hsl(0 0% 9%);
+  }
+  .grid-num {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 20px 0;
+    border-bottom: 1px solid hsl(0 0% 90%);
+    color: hsl(0 0% 45%);
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+  .grid-text {
+    font-size: 16px;
+    line-height: 1.75;
+    font-weight: 400;
+    padding: 20px 0 20px 12px;
+    border-bottom: 1px solid hsl(0 0% 90%);
+    color: hsl(0 0% 9%);
+    text-wrap: pretty;
+  }
+
+  /* --- form --- */
+  .form-section {
+    border-top: 1.5px solid hsl(0 0% 9%);
+    padding-top: 40px;
+    margin-bottom: 80px;
+  }
+  .form-label {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.011em;
+    margin-bottom: 20px;
+    color: hsl(0 0% 9%);
+  }
+  form {
+    display: flex;
+    gap: 0;
+    max-width: 460px;
+  }
+  input[type="email"] {
+    flex: 1;
+    padding: 14px 16px;
+    border: 1.5px solid hsl(0 0% 9%);
+    border-right: none;
+    border-radius: 6px 0 0 6px;
+    font-size: 15px;
+    font-family: inherit;
+    letter-spacing: -0.011em;
+    outline: none;
+    background: hsl(0 0% 100%);
+    color: hsl(0 0% 9%);
+    transition: box-shadow 0.15s;
+  }
+  input[type="email"]::placeholder { color: hsl(0 0% 64%); }
+  input[type="email"]:focus { box-shadow: 0 0 0 2px hsl(0 0% 80%); }
+  button {
+    background: hsl(0 0% 9%);
+    color: hsl(0 0% 98%);
+    border: 1.5px solid hsl(0 0% 9%);
+    border-radius: 0 6px 6px 0;
+    padding: 14px 28px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    letter-spacing: -0.011em;
+    cursor: pointer;
+    transition: opacity 0.15s;
+    white-space: nowrap;
+  }
+  button:hover { opacity: 0.85; }
+  .form-note {
+    font-size: 14px;
+    color: hsl(0 0% 45%);
+    margin-top: 12px;
+  }
+
+  /* --- table --- */
+  .compare {
+    margin-bottom: 80px;
+  }
+  .compare-label {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.011em;
+    margin-bottom: 16px;
+    color: hsl(0 0% 9%);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th {
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 12px 12px 12px 0;
+    border-bottom: 1.5px solid hsl(0 0% 9%);
+    color: hsl(0 0% 9%);
+  }
+  td {
+    padding: 12px 12px 12px 0;
+    border-bottom: 1px solid hsl(0 0% 90%);
+    font-size: 14px;
+    color: hsl(0 0% 45%);
+    line-height: 1.5;
+  }
+  td:first-child {
+    color: hsl(0 0% 64%);
+    font-size: 13px;
+  }
+  .us {
+    color: hsl(0 0% 4%);
+    font-weight: 700;
+  }
+
+  /* --- stat --- */
+  .stat {
+    border-top: 1px solid hsl(0 0% 90%);
+    padding-top: 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  .stat-num {
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1;
+    margin-bottom: 6px;
+    color: hsl(0 0% 4%);
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+  .stat-label {
+    font-size: 14px;
+    color: hsl(0 0% 45%);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 520px) {
+    .page { padding: 48px 20px 48px; }
+    .top { margin-bottom: 56px; }
+    h1 { margin-bottom: 24px; }
+    .lead { font-size: 18px; margin-bottom: 48px; }
+    .grid { margin-bottom: 48px; }
+    form { flex-direction: column; }
+    input[type="email"] { border-right: 1.5px solid hsl(0 0% 9%); border-bottom: none; border-radius: 6px 6px 0 0; }
+    button { border-radius: 0 0 6px 6px; width: 100%; }
+    .stat { grid-template-columns: 1fr; }
+    th, td { padding: 10px 8px 10px 0; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="top">
+    <div class="logo">Otwarty Sklep</div>
+    <div class="tag">Dla sprzedawców</div>
+  </div>
+
+  <h1>Sprzedawaj przez <mark>AI agentów</mark></h1>
+
+  <p class="lead">
+    Masz produkty ale nie masz platformy? Daj nam katalog
+    — wystawimy Twoje produkty w Von Halsky, ChatGPT i Google AI.
+    <mark>Bez Shopera, bez Base, bez abonamentów</mark>.
+  </p>
+
+  <div class="grid">
+    <div class="grid-num">01</div>
+    <div class="grid-text">Daj nam listę produktów — zdjęcia, ceny, opisy. <mark>Resztą zajmiemy się my</mark></div>
+    <div class="grid-num">02</div>
+    <div class="grid-text">Twoje produkty trafią do <mark>16 mln klientów InPostu</mark> i AI agentów zakupowych</div>
+    <div class="grid-num">03</div>
+    <div class="grid-text">Nie potrzebujesz platformy. Nie płacisz abonamentu. <mark>Zero kosztów wejścia</mark></div>
+  </div>
+
+  <div class="form-section">
+    <div class="form-label">Zostaw email — odezwiemy się w 48h</div>
+    <form action="https://formspree.io/f/TWOJ_ID" method="POST">
+      <input type="hidden" name="_landing" value="B-marketplace">
+      <input type="email" name="email" placeholder="twoj@email.pl" required>
+      <button type="submit">Chcę sprzedawać</button>
+    </form>
+    <div class="form-note">Bez spamu. Odpisujemy osobiście.</div>
+  </div>
+
+  <div class="compare">
+    <div class="compare-label">Porównanie</div>
+    <table>
+      <tr><th></th><th>Otwarty Sklep</th><th>Shoper</th><th>Base</th></tr>
+      <tr><td>Koszt wejścia</td><td class="us">0 zł</td><td>od 100 zł/mies.</td><td>od $39/mies.</td></tr>
+      <tr><td>Von Halsky</td><td class="us">W pakiecie</td><td>Osobno</td><td>Osobno</td></tr>
+      <tr><td>ChatGPT + Google AI</td><td class="us">W pakiecie</td><td>Brak</td><td>Brak</td></tr>
+      <tr><td>Czas startu</td><td class="us">24h</td><td>Dni</td><td>Dni</td></tr>
+    </table>
+  </div>
+
+  <div class="stat">
+    <div>
+      <div class="stat-num">50 mln</div>
+      <div class="stat-label">zapytań zakupowych dziennie w ChatGPT</div>
+    </div>
+    <div>
+      <div class="stat-num">16 mln</div>
+      <div class="stat-label">klientów InPostu w apce</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
