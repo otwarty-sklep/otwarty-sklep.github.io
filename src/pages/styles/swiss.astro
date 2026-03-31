@@ -1,0 +1,144 @@
+---
+// Showcase: swiss.css
+---
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>swiss.css — Otwarty Sklep Style</title>
+  <link rel="stylesheet" href="/swiss.css">
+</head>
+<body>
+
+  <nav>
+    <strong>swiss.css</strong>
+    <a href="/styles/default/">default.css</a>
+  </nav>
+
+  <h1>Swiss Typography <mark>Classless CSS</mark></h1>
+  <p>Inspirowany Swiss/International Typographic Style. Jedna kolumna, silna typografia, zero klas. Styluje czysty HTML.</p>
+
+  <h2>Typografia</h2>
+
+  <h1>Heading 1 — Wielki, ciasny, 800</h1>
+  <h2>Heading 2 — Z linią, 700</h2>
+  <h3>Heading 3 — Mniejszy, 600</h3>
+  <h4>Heading 4 — Kompaktowy, 600</h4>
+
+  <p>Paragraf z <strong>boldem</strong>, <em>kursywą</em>, <mark>markerem</mark>, <a href="#">linkiem</a>, <code>kodem inline</code> i <small>małym tekstem</small>. Tekst jest automatycznie typograficznie wygładzony — kerning, ligatury, kontekstowe alternaty.</p>
+
+  <blockquote>
+    <p>Blockquote — „Dobra typografia jest niewidoczna. Zła typografia jest wszędzie." — cytat z lewym borderem</p>
+  </blockquote>
+
+  <h2>Listy</h2>
+
+  <ul>
+    <li>Element listy nieuporządkowanej</li>
+    <li>Drugi element z <strong>boldem</strong></li>
+    <li>Trzeci element z <a href="#">linkiem</a></li>
+  </ul>
+
+  <ol>
+    <li>Pierwszy krok</li>
+    <li>Drugi krok</li>
+    <li>Trzeci krok</li>
+  </ol>
+
+  <h2>Steps — numerowana siatka</h2>
+
+  <dl data-steps>
+    <dt>01</dt>
+    <dd>Skopiuj nasz <strong>Google Sheet</strong> i wpisz produkty — <mark>znasz Excel? umiesz to</mark></dd>
+    <dt>02</dt>
+    <dd>Kliknij "Stwórz sklep" — automatycznie powstaje strona <mark>widoczna dla AI</mark></dd>
+    <dt>03</dt>
+    <dd>Klient kupuje, płaci na Twoje konto. <mark>Zero pośredników</mark></dd>
+  </dl>
+
+  <h2>Stat — liczby</h2>
+
+  <div data-stat>
+    <div><strong>23 194</strong><span>sklepów przeskanowanych</span></div>
+    <div><strong>43%</strong><span>ze schema.org</span></div>
+    <div><strong>0 zł</strong><span>koszt sklepu</span></div>
+  </div>
+
+  <h2>Tabela</h2>
+
+  <table>
+    <tr><th></th><th>Otwarty Sklep</th><th>Shoper</th><th>Allegro</th></tr>
+    <tr><td>Koszt</td><td><strong>0 zł</strong></td><td>100 zł/mies</td><td>8-12%</td></tr>
+    <tr><td>Czas startu</td><td><strong>10 minut</strong></td><td>godziny</td><td>dni</td></tr>
+    <tr><td>AI widoczność</td><td><strong>od dnia 1</strong></td><td>brak</td><td>tylko Allegro</td></tr>
+  </table>
+
+  <h2>Article / Card</h2>
+
+  <article>
+    <header><h3>Karta produktu</h3></header>
+    <p>Artykuł z borderem — karty, alerty, panele. Czysty <code>&lt;article&gt;</code> bez klas.</p>
+  </article>
+
+  <article>
+    <header><h3>Druga karta</h3></header>
+    <p>Kolejny artykuł. Stackują się z marginesem.</p>
+  </article>
+
+  <h2>Badges</h2>
+
+  <p>
+    <span data-badge="yes">tak</span>
+    <span data-badge="no">nie</span>
+    <span data-badge="green">aktywny</span>
+    <span data-badge="red">niedostępny</span>
+    <span data-badge="neutral">pending</span>
+  </p>
+
+  <h2>Formularz</h2>
+
+  <label>Email</label>
+  <input type="email" placeholder="twoj@email.pl">
+
+  <label>Wiadomość</label>
+  <textarea placeholder="Napisz coś..."></textarea>
+
+  <button>Wyślij</button>
+
+  <h2>Details / Accordion</h2>
+
+  <details>
+    <summary>Ile kosztuje Otwarty Sklep?</summary>
+    <p>Zero złotych. Na zawsze. Płacisz tylko prowizję procesora płatności (~2%).</p>
+  </details>
+
+  <details>
+    <summary>Czy potrzebuję wiedzy technicznej?</summary>
+    <p>Nie. Jeśli umiesz Excela — umiesz prowadzić sklep na Otwartym Sklepie.</p>
+  </details>
+
+  <details>
+    <summary>Jak długo trwa setup?</summary>
+    <p>10 minut. Kopiujesz arkusz, wpisujesz produkty, klikasz deploy.</p>
+  </details>
+
+  <h2>Kod</h2>
+
+  <pre><code>&lt;link rel="stylesheet" href="/swiss.css"&gt;
+
+&lt;!-- gotowe. zero klas. --&gt;
+&lt;h1&gt;Mój sklep&lt;/h1&gt;
+&lt;p&gt;Stylowany automatycznie.&lt;/p&gt;</code></pre>
+
+  <hr>
+
+  <h2>Separator</h2>
+  <p>Powyżej: <code>&lt;hr&gt;</code> — gruba linia, duży margines. Dzieli sekcje wizualnie.</p>
+
+  <footer>
+    <a href="/">Otwarty Sklep</a> · <a href="/styles/default/">default.css</a> · <a href="https://github.com/otwarty-sklep">GitHub</a>
+  </footer>
+
+</body>
+</html>
